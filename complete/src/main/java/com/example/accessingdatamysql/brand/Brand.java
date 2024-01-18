@@ -1,4 +1,4 @@
-package com.example.accessingdatamysql;
+package com.example.accessingdatamysql.brand;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

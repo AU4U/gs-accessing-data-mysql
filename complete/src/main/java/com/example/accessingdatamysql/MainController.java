@@ -1,5 +1,7 @@
 package com.example.accessingdatamysql;
 
+import com.example.accessingdatamysql.brand.Brand;
+import com.example.accessingdatamysql.brand.BrandRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,15 +37,15 @@ public class MainController {
 		// This returns a JSON or XML with the users
 		return userRepository.findAll();
 	}
-	@PostMapping(path="/brand/add")
-	public @ResponseBody String addBrand(@RequestParam String name){
-		Brand b = new Brand();
-		b.setName(name);
-		brandRepository.save(b);
-		return "Saved";
-	}
-	@GetMapping(path="/brand/all")
-	public @ResponseBody Iterable<Brand> getAllBrand(){
-		return brandRepository.findAll();
-	}
+//	@PostMapping(path="/brand/add")
+//	public @ResponseBody String addBrand(@RequestParam String name){
+//		Brand b = new Brand();
+//		b.setName(name);
+//		brandRepository.save(b);
+//		return "Saved";
+//	}
+//	@GetMapping(path="/brand/all")
+//	public @ResponseBody Iterable<Brand> getAllBrand(){
+//		return brandRepository.findAll();
+//	}
 }
