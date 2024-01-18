@@ -2,6 +2,9 @@ package com.example.accessingdatamysql.equipment;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * 设备信息
+ */
 @lombok.NoArgsConstructor
 @lombok.Data
 public class Equipment {
