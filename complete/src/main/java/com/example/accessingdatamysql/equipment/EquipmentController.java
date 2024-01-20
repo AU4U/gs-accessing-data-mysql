@@ -6,13 +6,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping(path = "/equipment")
+//@RequestMapping(path = "/equipment")
 public class EquipmentController {
     @Autowired
     private EquipmentRepository equipmentRepository;
 
-    @PostMapping(path = "/add")
-    public @ResponseBody String addBrand(
+    @PostMapping(path = "/equipments")
+    public @ResponseBody String add(
             @RequestParam String name,
             @RequestParam String connectPintType,
             @RequestParam String weldingTongType,
@@ -49,8 +49,8 @@ public class EquipmentController {
         return "Saved";
     }
 
-    @GetMapping(path = "/all")
-    public @ResponseBody Iterable<Equipment> getAllBrand() {
+    @GetMapping(path = "/equipments")
+    public @ResponseBody Iterable<Equipment> all() {
         return equipmentRepository.findAll();
     }
 
