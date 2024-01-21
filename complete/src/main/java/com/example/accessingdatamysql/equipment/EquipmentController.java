@@ -1,7 +1,10 @@
 package com.example.accessingdatamysql.equipment;
 
 import com.example.accessingdatamysql.brand.Brand;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,40 +15,8 @@ public class EquipmentController {
     private EquipmentRepository equipmentRepository;
 
     @PostMapping(path = "/equipments")
-    public @ResponseBody String add(
-            @RequestParam String name,
-            @RequestParam String connectPintType,
-            @RequestParam String weldingTongType,
-            @RequestParam String brand,
-            @RequestParam String type,
-            @RequestParam String img,
-            @RequestParam String model,
-            @RequestParam Integer a,
-            @RequestParam Integer b,
-            @RequestParam Integer c,
-            @RequestParam Integer d,
-            @RequestParam String e,
-            @RequestParam String listingDate,
-            @RequestParam Boolean stopProduction
-
-
-    ) {
-        Equipment equipment = new Equipment();
-        equipment.setName(name);
-        equipment.setConnectPintType(connectPintType);
-        equipment.setWeldingTongType(weldingTongType);
-        equipment.setBrand(brand);
-        equipment.setType(type);
-        equipment.setImg(img);
-        equipment.setModel(model);
-        equipment.setA(a);
-        equipment.setB(b);
-        equipment.setC(c);
-        equipment.setD(d);
-        equipment.setE(e);
-        equipment.setListingDate(listingDate);
-        equipment.setStopProduction(stopProduction);
-        equipmentRepository.save(equipment);
+    public @ResponseBody String newEquipment(@RequestBody Equipment newEquipment) {
+        equipmentRepository.save(newEquipment);
         return "Saved";
     }
 
@@ -53,5 +24,27 @@ public class EquipmentController {
     public @ResponseBody Iterable<Equipment> all() {
         return equipmentRepository.findAll();
     }
+    @GetMapping(path = "/equipments/{id}")
+    public @ResponseBody Equipment one(@PathVariable int id) {
+        return equipmentRepository.findById(id).orElseThrow(() -> new RuntimeException("not found equipment by " + id));
+    }
 
+    @DeleteMapping(path = "/equipments/{id}")
+    public @ResponseBody ResponseEntity<?> delete(@PathVariable int id) {
+        equipmentRepository.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping(path = "/equipments/{id}")
+    public Equipment update(@PathVariable int id, @RequestBody Equipment newEquipment) {
+        return equipmentRepository.findById(id)
+                .map(equipment -> {
+                    BeanUtils.copyProperties(newEquipment,equipment,"id");
+                    return equipmentRepository.save(equipment);
+                })
+                .orElseGet(() -> {
+                    newEquipment.setId(id);
+                    return equipmentRepository.save(newEquipment);
+                });
+    }
 }
