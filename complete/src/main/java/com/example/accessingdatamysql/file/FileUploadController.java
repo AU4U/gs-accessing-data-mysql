@@ -15,6 +15,8 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Controller
@@ -29,12 +31,10 @@ public class FileUploadController {
 
 	@GetMapping("file_test")
 	public String listUploadedFiles(Model model) throws IOException {
-
 		model.addAttribute("files", storageService.loadAll().map(
 				path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
 						"serveFile", path.getFileName().toString()).build().toUri().toString())
 				.collect(Collectors.toList()));
-
 		return "uploadForm";
 	}
 
@@ -48,17 +48,21 @@ public class FileUploadController {
 				"attachment; filename=\"" + file.getFilename() + "\"").body(file);
 	}
 
+	/**
+	 * 单个文件上传
+	 * @param file  文件
+	 * @return 重定向到上传成功页面
+	 */
 	@PostMapping("/file")
-	public String handleFileUpload(@RequestParam("file") MultipartFile file,
-			RedirectAttributes redirectAttributes) {
-		storageService.store(file);
-		redirectAttributes.addFlashAttribute("message",
-				"You successfully uploaded " + file.getOriginalFilename() + "!");
-		return "redirect:/file_test";
+	public @ResponseBody ResponseEntity<?> handleFileUpload(@RequestParam("file") MultipartFile file) {
+		FileDTO fileUrls = storageService.store(file);
+		Map<String, Object> responseBody = new HashMap<>();
+		responseBody.put("fileInfo", fileUrls);
+		return new ResponseEntity<>(responseBody,HttpStatus.OK);
 	}
 
 	@PostMapping("/files")
-	public @ResponseBody ResponseEntity<?>  handleFilesUpload(@RequestParam("files") MultipartFile[] files) {
+	public @ResponseBody ResponseEntity<?> handleFilesUpload(@RequestParam("files") MultipartFile[] files) {
 		for (MultipartFile file : files) {
 			storageService.store(file);
 		}
