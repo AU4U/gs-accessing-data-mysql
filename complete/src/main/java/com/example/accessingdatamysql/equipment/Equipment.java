@@ -1,9 +1,7 @@
 package com.example.accessingdatamysql.equipment;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.accessingdatamysql.equipment_type.EquipmentType;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,9 +14,11 @@ import lombok.Setter;
 @Entity
 public class Equipment {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
-    private String name;
+    @ManyToOne
+    @JoinColumn(name = "equipment_type_id")
+    private EquipmentType equipmentType;
     private String connectPintType;
     private String weldingTongType;
     private String brand;

@@ -1,11 +1,11 @@
 package com.example.accessingdatamysql.equipment_type;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.accessingdatamysql.equipment.Equipment;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 /**
  * 设备类型
@@ -15,7 +15,9 @@ import lombok.Setter;
 @Entity
 public class EquipmentType {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
     private String value;
+    @OneToMany(mappedBy = "equipmentType")
+    private List<Equipment> equipments;
 }
