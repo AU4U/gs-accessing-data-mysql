@@ -49,7 +49,7 @@ public class Equipment {
     /**
      * 模型文件
      */
-    private String model;
+    private String modelFile;
     /**
      * 喉深A
      */

@@ -17,9 +17,15 @@ import java.util.List;
 @Getter
 @Entity
 public class EquipmentType {
+    /**
+     * 设备类型id
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    /**
+     * 设备类型名称
+     */
     @ApiModelProperty(required = true)
     @NotNull
     private String value;
