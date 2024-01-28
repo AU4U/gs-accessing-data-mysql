@@ -29,6 +29,12 @@ public class FileUploadController {
 		this.storageService = storageService;
 	}
 
+	/**
+	 * 文件上传测试页面
+	 * @param model
+	 * @return
+	 * @throws IOException
+	 */
 	@GetMapping("file_test")
 	public String listUploadedFiles(Model model) throws IOException {
 		model.addAttribute("files", storageService.loadAll().map(
@@ -38,6 +44,11 @@ public class FileUploadController {
 		return "uploadForm";
 	}
 
+	/**
+	 * 单个文件下载
+	 * @param filename 文件名
+	 * @return
+	 */
 	@GetMapping("/files/{filename:.+}")
 	@ResponseBody
 	public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
@@ -61,6 +72,11 @@ public class FileUploadController {
 		return new ResponseEntity<>(responseBody,HttpStatus.OK);
 	}
 
+	/**
+	 * 多个文件上传
+	 * @param files
+	 * @return
+	 */
 	@PostMapping("/files")
 	public @ResponseBody ResponseEntity<?> handleFilesUpload(@RequestParam("files") MultipartFile[] files) {
 		for (MultipartFile file : files) {
@@ -69,6 +85,11 @@ public class FileUploadController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
+	/**
+	 * 获取所有文件
+	 * @return
+	 * @throws IOException
+	 */
 	@GetMapping("/files")
 	public @ResponseBody ResponseEntity<?> listUploadedFiles() throws IOException {
 		return new ResponseEntity<>(storageService.loadAll().map(

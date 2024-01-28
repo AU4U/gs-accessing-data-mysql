@@ -14,6 +14,9 @@ import lombok.Setter;
 @Getter
 @Entity
 public class Equipment {
+    /**
+     * 设备id
+     */
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;

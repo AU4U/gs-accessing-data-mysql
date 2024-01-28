@@ -16,7 +16,13 @@ import lombok.Setter;
 public class Brand {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
+    /**
+     * 品牌id
+     */
     private Integer id;
+    /**
+     * 品牌名称
+     */
     private String value;
 
 }

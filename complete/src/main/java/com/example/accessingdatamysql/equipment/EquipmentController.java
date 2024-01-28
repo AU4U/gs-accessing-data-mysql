@@ -3,6 +3,7 @@ package com.example.accessingdatamysql.equipment;
 import com.example.accessingdatamysql.brand.Brand;
 import com.example.accessingdatamysql.equipment_type.EquipmentType;
 import com.example.accessingdatamysql.equipment_type.EquipmentTypeRepository;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,7 @@ public class EquipmentController {
 
 
     @PostMapping(path = "/equipments")
-public @ResponseBody String newEquipment(@RequestBody Equipment newEquipment) {
+public @ResponseBody String create(@RequestBody @NotNull Equipment newEquipment) {
     EquipmentType existingEquipmentType = equipmentTypeRepository.findById(newEquipment.getEquipmentType().getId())
             .orElseThrow(() -> new RuntimeException("EquipmentType with id " + newEquipment.getEquipmentType().getId() + " does not exist"));
     newEquipment.setEquipmentType(existingEquipmentType);
