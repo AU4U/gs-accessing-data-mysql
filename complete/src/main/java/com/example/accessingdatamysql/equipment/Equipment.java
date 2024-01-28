@@ -17,7 +17,6 @@ public class Equipment {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
-    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "equipment_type_id")
     private EquipmentType equipmentType;

@@ -1,6 +1,8 @@
 package com.example.accessingdatamysql.equipment;
 
 import com.example.accessingdatamysql.brand.Brand;
+import com.example.accessingdatamysql.equipment_type.EquipmentType;
+import com.example.accessingdatamysql.equipment_type.EquipmentTypeRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,12 +15,18 @@ import org.springframework.web.bind.annotation.*;
 public class EquipmentController {
     @Autowired
     private EquipmentRepository equipmentRepository;
+    @Autowired
+    private EquipmentTypeRepository equipmentTypeRepository;
+
 
     @PostMapping(path = "/equipments")
-    public @ResponseBody String newEquipment(@RequestBody Equipment newEquipment) {
-        equipmentRepository.save(newEquipment);
-        return "Saved";
-    }
+public @ResponseBody String newEquipment(@RequestBody Equipment newEquipment) {
+    EquipmentType existingEquipmentType = equipmentTypeRepository.findById(newEquipment.getEquipmentType().getId())
+            .orElseThrow(() -> new RuntimeException("EquipmentType with id " + newEquipment.getEquipmentType().getId() + " does not exist"));
+    newEquipment.setEquipmentType(existingEquipmentType);
+    equipmentRepository.save(newEquipment);
+    return "Saved";
+}
 
     @GetMapping(path = "/equipments")
     public @ResponseBody Iterable<Equipment> all() {
