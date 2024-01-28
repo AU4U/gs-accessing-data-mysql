@@ -1,6 +1,7 @@
 package com.example.accessingdatamysql.equipment;
 
 import com.example.accessingdatamysql.equipment_type.EquipmentType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +17,8 @@ public class Equipment {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "equipment_type_id")
     private EquipmentType equipmentType;
     private String connectPintType;
