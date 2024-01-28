@@ -1,6 +1,7 @@
 package com.example.accessingdatamysql.equipment_type;
 
-import jakarta.validation.constraints.NotNull;
+//import jakarta.validation.Valid;
+//import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class EquipmentTypeController {
      * @return
      */
     @PostMapping(path = "/equipmentType")
-    public @ResponseBody EquipmentType create(@RequestBody @NotNull EquipmentType newEquipmentType) {
+    public @ResponseBody EquipmentType create(@RequestBody  EquipmentType newEquipmentType) {
         return equipmentTypeRepository.save(newEquipmentType);
     }
 

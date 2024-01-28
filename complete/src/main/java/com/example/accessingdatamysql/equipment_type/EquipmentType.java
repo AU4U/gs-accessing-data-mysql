@@ -3,12 +3,11 @@ package com.example.accessingdatamysql.equipment_type;
 import com.example.accessingdatamysql.equipment.Equipment;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -26,6 +25,5 @@ public class EquipmentType {
     private String value;
     @JsonIgnore
     @OneToMany(mappedBy = "equipmentType")
-    @Nullable
     private List<Equipment> equipments;
 }
