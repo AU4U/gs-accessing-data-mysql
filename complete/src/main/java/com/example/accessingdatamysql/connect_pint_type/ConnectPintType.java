@@ -1,4 +1,4 @@
-package com.example.accessingdatamysql.equipment_type;
+package com.example.accessingdatamysql.connect_pint_type;
 
 import com.example.accessingdatamysql.equipment.Equipment;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -11,20 +11,20 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
- * 设备类型
+ * 连接点类型
  */
 @Setter
 @Getter
 @Entity
-public class EquipmentType {
+public class ConnectPintType {
     /**
-     * 设备类型id
+     * 连接点类型id
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     /**
-     * 设备类型名称
+     * 连接点类型名称
      */
     @ApiModelProperty(required = true)
     @NotNull

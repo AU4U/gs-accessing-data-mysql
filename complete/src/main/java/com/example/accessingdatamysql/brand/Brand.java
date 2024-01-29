@@ -8,17 +8,18 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 品牌消息
+ * 品牌VO
  */
 @Setter
 @Getter
 @Entity
 public class Brand {
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
     /**
      * 品牌id
      */
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+
     private Integer id;
     /**
      * 品牌名称

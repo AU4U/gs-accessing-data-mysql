@@ -9,7 +9,6 @@ import lombok.Setter;
 /**
  * 设备信息
  */
-
 @Setter
 @Getter
 @Entity
@@ -20,11 +19,11 @@ public class Equipment {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "equipment_type_id")
     /**
      * 设备类型
      */
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "equipment_type_id")
     private EquipmentType equipmentType;
     /**
      * 连接点类型

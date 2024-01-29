@@ -11,6 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * 设备
+ */
 @Controller
 //@RequestMapping(path = "/equipment")
 public class EquipmentController {
@@ -19,7 +22,11 @@ public class EquipmentController {
     @Autowired
     private EquipmentTypeRepository equipmentTypeRepository;
 
-
+    /**
+     * 创建设备
+     * @param newEquipment 设备
+     * @return Equipment 设备
+     */
     @PostMapping(path = "/equipments")
 public @ResponseBody String create(@RequestBody @NotNull Equipment newEquipment) {
     EquipmentType existingEquipmentType = equipmentTypeRepository.findById(newEquipment.getEquipmentType().getId())
@@ -29,21 +36,42 @@ public @ResponseBody String create(@RequestBody @NotNull Equipment newEquipment)
     return "Saved";
 }
 
+    /**
+     * 获取所有设备
+     * @return Iterable<Equipment> 设备列表
+     */
     @GetMapping(path = "/equipments")
     public @ResponseBody Iterable<Equipment> all() {
         return equipmentRepository.findAll();
     }
+
+    /**
+     * 获取指定id的设备
+     * @param id 设备id
+     * @return Equipment 设备
+     */
     @GetMapping(path = "/equipments/{id}")
     public @ResponseBody Equipment one(@PathVariable int id) {
         return equipmentRepository.findById(id).orElseThrow(() -> new RuntimeException("not found equipment by " + id));
     }
 
+    /**
+     * 删除指定id的设备
+     * @param id 设备id
+     * @return ResponseEntity<?>
+     */
     @DeleteMapping(path = "/equipments/{id}")
     public @ResponseBody ResponseEntity<?> delete(@PathVariable int id) {
         equipmentRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    /**
+     * 更新指定id的设备
+     * @param id 设备id
+     * @param newEquipment 设备
+     * @return 设备
+     */
     @PutMapping(path = "/equipments/{id}")
     public Equipment update(@PathVariable int id, @RequestBody Equipment newEquipment) {
         return equipmentRepository.findById(id)

@@ -19,7 +19,7 @@ public class EquipmentTypeController {
     /**
      * 创建设备类型
      * @param newEquipmentType 设备类型
-     * @return
+     * @return EquipmentType 设备类型
      */
     @PostMapping(path = "/equipmentType")
     public @ResponseBody EquipmentType create(@RequestBody  EquipmentType newEquipmentType) {
@@ -28,7 +28,7 @@ public class EquipmentTypeController {
 
     /**
      * 获取所有设备类型
-     * @return
+     * @return Iterable<EquipmentType> 设备类型列表
      */
     @GetMapping(path = "/equipmentType")
     public @ResponseBody Iterable<EquipmentType> all() {
@@ -38,7 +38,7 @@ public class EquipmentTypeController {
     /**
      * 获取指定id的设备类型
      * @param id 设备类型id
-     * @return
+     * @return EquipmentType 设备类型
      */
     @GetMapping(path = "/equipmentType/{id}")
     public @ResponseBody EquipmentType one(@PathVariable int id) {
