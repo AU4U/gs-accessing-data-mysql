@@ -1,6 +1,9 @@
 package com.example.accessingdatamysql.equipment;
 
 import com.example.accessingdatamysql.brand.Brand;
+import com.example.accessingdatamysql.brand.BrandRepository;
+import com.example.accessingdatamysql.connect_pint_type.ConnectPintType;
+import com.example.accessingdatamysql.connect_pint_type.ConnectPintTypeRepository;
 import com.example.accessingdatamysql.equipment_type.EquipmentType;
 import com.example.accessingdatamysql.equipment_type.EquipmentTypeRepository;
 import jakarta.validation.constraints.NotNull;
@@ -21,7 +24,10 @@ public class EquipmentController {
     private EquipmentRepository equipmentRepository;
     @Autowired
     private EquipmentTypeRepository equipmentTypeRepository;
-
+    @Autowired
+    private ConnectPintTypeRepository connectPintTypeRepository;
+    @Autowired
+    private BrandRepository brandRepository;
     /**
      * 创建设备
      * @param newEquipment 设备
@@ -29,12 +35,15 @@ public class EquipmentController {
      */
     @PostMapping(path = "/equipments")
 public @ResponseBody String create(@RequestBody @NotNull Equipment newEquipment) {
-    EquipmentType existingEquipmentType = equipmentTypeRepository.findById(newEquipment.getEquipmentType().getId())
-            .orElseThrow(() -> new RuntimeException("EquipmentType with id " + newEquipment.getEquipmentType().getId() + " does not exist"));
-    newEquipment.setEquipmentType(existingEquipmentType);
-    equipmentRepository.save(newEquipment);
-    return "Saved";
-}
+        EquipmentType existingEquipmentType = equipmentTypeRepository.findById(newEquipment.getEquipmentType().getId())
+                .orElseThrow(() -> new RuntimeException("EquipmentType with id " + newEquipment.getEquipmentType().getId() + " does not exist"));
+        newEquipment.setEquipmentType(existingEquipmentType);
+        ConnectPintType existingConnectPintType = connectPintTypeRepository.findById(newEquipment.getConnectPintType().getId())
+                .orElseThrow(() -> new RuntimeException("ConnectPintType with id " + newEquipment.getConnectPintType().getId() + " does not exist"));
+        newEquipment.setConnectPintType(existingConnectPintType);
+        equipmentRepository.save(newEquipment);
+        return "Saved";
+    }
 
     /**
      * 获取所有设备
