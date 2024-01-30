@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * 焊钳类型类型
+ * 焊钳类型
  */
 @Controller    // This means that this class is a Controller
 public class WeldingTongTypeController {
