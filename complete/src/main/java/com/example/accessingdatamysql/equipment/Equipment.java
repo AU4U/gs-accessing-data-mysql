@@ -1,5 +1,6 @@
 package com.example.accessingdatamysql.equipment;
 
+import com.example.accessingdatamysql.connect_pint_type.ConnectPintType;
 import com.example.accessingdatamysql.equipment_type.EquipmentType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -9,7 +10,6 @@ import lombok.Setter;
 /**
  * 设备信息
  */
-
 @Setter
 @Getter
 @Entity
@@ -20,16 +20,16 @@ public class Equipment {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "equipment_type_id")
     /**
      * 设备类型
      */
+    @ManyToOne(cascade = CascadeType.ALL)
     private EquipmentType equipmentType;
     /**
      * 连接点类型
      */
-    private String connectPintType;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private ConnectPintType connectPintType;
     /**
      * 焊接钳类型
      */

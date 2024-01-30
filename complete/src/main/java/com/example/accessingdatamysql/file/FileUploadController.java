@@ -19,6 +19,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * 文件
+ */
 @Controller
 public class FileUploadController {
 
@@ -31,8 +34,8 @@ public class FileUploadController {
 
 	/**
 	 * 文件上传测试页面
-	 * @param model
-	 * @return
+	 * @param model 模型
+	 * @return uploadForm.html
 	 * @throws IOException
 	 */
 	@GetMapping("file_test")
@@ -47,7 +50,7 @@ public class FileUploadController {
 	/**
 	 * 单个文件下载
 	 * @param filename 文件名
-	 * @return
+	 * @return 文件
 	 */
 	@GetMapping("/files/{filename:.+}")
 	@ResponseBody
@@ -74,8 +77,8 @@ public class FileUploadController {
 
 	/**
 	 * 多个文件上传
-	 * @param files
-	 * @return
+	 * @param files 文件数组
+	 * @return 重定向到上传成功页面
 	 */
 	@PostMapping("/files")
 	public @ResponseBody ResponseEntity<?> handleFilesUpload(@RequestParam("files") MultipartFile[] files) {
@@ -87,8 +90,8 @@ public class FileUploadController {
 
 	/**
 	 * 获取所有文件
-	 * @return
-	 * @throws IOException
+	 * @return 文件列表
+	 * @throws IOException IO异常
 	 */
 	@GetMapping("/files")
 	public @ResponseBody ResponseEntity<?> listUploadedFiles() throws IOException {

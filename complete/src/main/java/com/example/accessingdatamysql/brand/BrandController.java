@@ -6,6 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * 品牌类型
+ */
 @Controller    // This means that this class is a Controller
 public class BrandController {
     @Autowired
@@ -14,7 +17,7 @@ public class BrandController {
     /**
      * 创建品牌
      * @param newBrand 品牌
-     * @return
+     * @return Brand 品牌
      */
     @PostMapping(path = "/brands")
     public @ResponseBody Brand newBrand(@RequestBody Brand newBrand) {
@@ -23,7 +26,7 @@ public class BrandController {
 
     /**
      * 获取所有品牌
-     * @return
+     * @return Iterable<Brand> 品牌列表
      */
     @GetMapping(path = "/brands")
     public @ResponseBody Iterable<Brand> all() {
@@ -32,8 +35,8 @@ public class BrandController {
 
     /**
      * 获取指定id的品牌
-     * @param id
-     * @return
+     * @param id 品牌id
+     * @return 品牌
      */
     @GetMapping(path = "/brands/{id}")
     public @ResponseBody Brand one(@PathVariable int id) {
@@ -42,8 +45,8 @@ public class BrandController {
 
     /**
      * 删除指定id的品牌
-     * @param id
-     * @return
+     * @param id 品牌id
+     * @return ResponseEntity<?>
      */
     @DeleteMapping(path = "/brands/{id}")
     public ResponseEntity<?> delete(@PathVariable int id) {
@@ -56,9 +59,9 @@ public class BrandController {
 
     /**
      * 更新指定id的品牌
-     * @param id
-     * @param newBrand
-     * @return
+     * @param id 品牌id
+     * @param newBrand 品牌
+     * @return 品牌
      */
     @PutMapping(path = "/brands/{id}")
     public Brand update(@PathVariable int id, @RequestBody Brand newBrand) {
