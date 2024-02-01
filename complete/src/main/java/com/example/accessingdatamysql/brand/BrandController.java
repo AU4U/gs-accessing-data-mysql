@@ -20,7 +20,7 @@ public class BrandController {
      * @return Brand 品牌
      */
     @PostMapping(path = "/brands")
-    public @ResponseBody Brand newBrand(@RequestBody Brand newBrand) {
+    public @ResponseBody Brand create(@RequestBody Brand newBrand) {
         return brandRepository.save(newBrand);
     }
 
