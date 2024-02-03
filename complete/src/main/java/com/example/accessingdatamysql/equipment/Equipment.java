@@ -1,11 +1,15 @@
 package com.example.accessingdatamysql.equipment;
 
+import com.example.accessingdatamysql.brand.Brand;
 import com.example.accessingdatamysql.connect_pint_type.ConnectPintType;
 import com.example.accessingdatamysql.equipment_type.EquipmentType;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.accessingdatamysql.file.FileDTO;
+import com.example.accessingdatamysql.welding_ton_type.brand.WeldingTongType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 /**
  * 设备信息
@@ -23,33 +27,38 @@ public class Equipment {
     /**
      * 设备类型
      */
-    @ManyToOne(cascade = CascadeType.ALL)
+    @JdbcTypeCode(SqlTypes.JSON)
     private EquipmentType equipmentType;
     /**
      * 连接点类型
      */
-    @ManyToOne(cascade = CascadeType.ALL)
+    @JdbcTypeCode(SqlTypes.JSON)
     private ConnectPintType connectPintType;
     /**
      * 焊接钳类型
      */
-    private String weldingTongType;
+    @JdbcTypeCode(SqlTypes.JSON)
+    private WeldingTongType weldingTongType;
     /**
      * 品牌
      */
-    private String brand;
+    @JdbcTypeCode(SqlTypes.JSON)
+    private Brand brand;
     /**
      * 设备型号
      */
-    private String equipmentModel;
+    @JdbcTypeCode(SqlTypes.JSON)
+    private EquipmentType equipmentModel;
     /**
      * 图片
      */
-    private String img;
+    @JdbcTypeCode(SqlTypes.JSON)
+    private FileDTO img;
     /**
      * 模型文件
      */
-    private String modelFile;
+    @JdbcTypeCode(SqlTypes.JSON)
+    private FileDTO modelFile;
     /**
      * 喉深A
      */

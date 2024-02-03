@@ -1,14 +1,14 @@
 package com.example.accessingdatamysql.connect_pint_type;
 
-import com.example.accessingdatamysql.equipment.Equipment;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 /**
  * 连接点类型
@@ -29,8 +29,4 @@ public class ConnectPintType {
     @ApiModelProperty(required = true)
     @NotNull
     private String value;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "equipmentType")
-    private List<Equipment> equipments;
 }

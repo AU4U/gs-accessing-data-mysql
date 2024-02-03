@@ -26,6 +26,8 @@ public class EquipmentController {
     private EquipmentTypeRepository equipmentTypeRepository;
     @Autowired
     private ConnectPintTypeRepository connectPintTypeRepository;
+
+
     @Autowired
     private BrandRepository brandRepository;
     /**
@@ -34,15 +36,9 @@ public class EquipmentController {
      * @return Equipment 设备
      */
     @PostMapping(path = "/equipments")
-public @ResponseBody String create(@RequestBody @NotNull Equipment newEquipment) {
-        EquipmentType existingEquipmentType = equipmentTypeRepository.findById(newEquipment.getEquipmentType().getId())
-                .orElseThrow(() -> new RuntimeException("EquipmentType with id " + newEquipment.getEquipmentType().getId() + " does not exist"));
-        newEquipment.setEquipmentType(existingEquipmentType);
-        ConnectPintType existingConnectPintType = connectPintTypeRepository.findById(newEquipment.getConnectPintType().getId())
-                .orElseThrow(() -> new RuntimeException("ConnectPintType with id " + newEquipment.getConnectPintType().getId() + " does not exist"));
-        newEquipment.setConnectPintType(existingConnectPintType);
+public @ResponseBody Equipment create(@RequestBody @NotNull Equipment newEquipment) {
         equipmentRepository.save(newEquipment);
-        return "Saved";
+        return newEquipment;
     }
 
     /**
